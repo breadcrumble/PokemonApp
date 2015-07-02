@@ -9,13 +9,16 @@ angular.module('app', ['ui.bootstrap'])
       $scope.attackDex = data;
     });
     $http.get('lib/json/validated_learnset.json').success(function(data) {
-      $scope.learnset = data;
+      $scope.oldLearnset = data;
     });
     $http.get('lib/json/pokedex.json').success(function(data) {
       $scope.pokedex = data;
     });
     $http.get('lib/json/typechart.json').success(function(data) {
       $scope.typeChart = data;
+    });
+    $http.get('lib/json/learnset.json').success(function(data) {
+      $scope.learnset = data;
     });
 
     // $scope.namesArray = [$scope.firstTeam[0].data.name];
@@ -48,7 +51,7 @@ angular.module('app', ['ui.bootstrap'])
     };
 
 
-    var firstTeam = [{
+    $scope.firstTeam = [{
       "data": {
         "ndex": 652,
         "name": "Chesnaught",
@@ -92,7 +95,7 @@ angular.module('app', ['ui.bootstrap'])
         return pkmn.index == pokemon.index;
       });
       var name = $scope.firstTeam[index].data.name + "";
-      var nameString = name.toLowerCase();
+      var nameString = name;
       return nameString;
     };
     $scope.getPokemonAttacks = function(pokemonName) {
@@ -105,28 +108,15 @@ angular.module('app', ['ui.bootstrap'])
     $scope.getAttackList = function (pokemon) {
       var index = _.findIndex($scope.firstTeam, function(pkmn) {
         return pkmn.index == pokemon.index;
-        //  && pkmn.appState == pokemon.appState;
       });
       var name = $scope.firstTeam[index].data.name + "";
-      var nameString = name.toLowerCase();
+      var nameString = name;
       var arrays = $scope.learnset[nameString];
       return arrays;
-
     };
-//TODO check for reoeats
-// var checkForDuplicates = function(array) {
-//   for (var i = 0; i < array.length; i++) {
-//       for (var j = 1; j < array.length; j++) {
-//         array[i] == array[j];
-//       }
-//   }
-// };
 
 
-    //NOTE this is not in use (yet) TODO create state to show this. (optional)
-    var reallyBlankSlot = {
-      "appState": "reallyBlank"
-    };
+
     var retrieveAttackFromName = function(attackid) {
       var index = _.findIndex($scope.attackDex, function(attack) {
         return attack.id = attackid;
@@ -134,36 +124,17 @@ angular.module('app', ['ui.bootstrap'])
         return $scope.attackDex[index]
     };
 
-    //TODO create a function that populates blank (and really blank) slots into the array if not full
-    // var pushOneObject = function() {
-    //   var blankSlot = {
-    //     "appState": "blank",
-    //     "index": $scope.firstTeam.length
-    //   };
-    //   $scope.firstTeam.push(blankSlot);
-    // };
-    //
-    // $scope.pushOneObject = pushOneObject;
 
 
-    //NOTE there are a few appStates: read, add, c
-    //Private functions (to be revealed at the bottom)
-
-    // var deletePokemon = function (pkmn) {
-    //   firstTeam.splice(pkmn);
-    // }
-    //Controlling App State
-
-    //TODO
-    var addPokemon = function(pokemon) {
+    //NOTE Controlling state change functions
+    $scope.addPokemon = function(pokemon) {
       if ($scope.firstTeam.length < 6) {
         pokemon.appState = "add";
         var blankSlot = {
           "appState": "blank",
-          "index": $scope.firstTeam.length,
-          "data": {
-            "moves": [""]
+          "index": $scope.firstTeam.length
           }
+
         };
         $scope.firstTeam.push(blankSlot);
       } else {
@@ -171,19 +142,13 @@ angular.module('app', ['ui.bootstrap'])
       }
     };
 
-    var editPokemon = function(pokemon) {
+    $scope.editPokemon = function(pokemon) {
       pokemon.appState = "edit";
-    }
+    };
 
-    var saveChanges = function(pokemon) {
+    $scope.saveChanges = function(pokemon) {
         pokemon.appState = "read";
-      }
-      //revealing function pattern
-    $scope.addPokemon = addPokemon;
-    $scope.editPokemon = editPokemon;
-    $scope.saveChanges = saveChanges;
-    // $scope.deletePokemon = deletePokemon;
-    $scope.firstTeam = firstTeam;
+      };
   })
 
 .filter('titlecase', function() {
