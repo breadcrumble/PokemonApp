@@ -1,0 +1,54 @@
+<div class="fixed-height panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <strong>#{{pokemon.data.ndex}}: {{pokemon.data.name | uppercase}}</strong>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <!-- TODO look for a mirror or download the resource for images yourself. Also put that in credits -->
+    <table class="table" width="100%">
+      <tr>
+        <!-- TODO how do i justify?? -->
+        <td class="parent" width="45%">
+          <div class="center-align">
+            <img alt="{{pokemon.data.name}}" class="pokemon-avatar"
+              ng-src="http://www.serebii.net/xy/pokemon/{{pokemon.data.ndex | zeroPadding}}.png"/>
+            <h4>
+              <strong>Type:
+              </strong>
+              <i>{{pokemon.data.type[0] | titlecase}}</i>
+              <i ng-show="pokemon.data.type[1]">| {{pokemon.data.type[1] | titlecase}}</i>
+            </h4>
+            <button aria-label="Left Align" class="btn btn-default btn-sm" type="button" ng-click="editPokemon(pokemon)">
+              <span aria-hidden="true" class="glyphicon glyphicon-edit"></span>
+              Edit
+            </button>
+            <button aria-label="Left Align" class="btn btn-danger btn-sm" type="button">
+              <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
+              Delete
+            </button>
+          </div>
+        </td>
+        <td class="parent" width="55%">
+          <div>
+            <!-- originally i put .center-align -->
+            <h3><strong>{{pokemon.data.name}}</strong></h3>
+            <hr></hr>
+              <h4>
+                <strong>Moveset:
+                </strong>
+                <br> </br>
+                  <li class="unstyled" ng-repeat="move in pokemon.data.moves">
+                    <i>
+                      {{move | titlecase}}
+                    </i></li>
+                    </h4>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                {{pokemon | json }}
+              </tr>
+            </table>
+          </div>
+        </div>

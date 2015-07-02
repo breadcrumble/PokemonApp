@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="main.js"></script>
+</head>
+<body>
+	
+<div class="navbar navbar-default">
+  <div class="container">
+    <a class="navbar-brand" href="#">Brand</a>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+      <li class="divider-vertical"></li>
+      <li><a href="#">More</a></li>
+      <li><a href="#">Options</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="container">
+  <div class="jumbotron text-center">
+    <h2>Pokemon Team Analyzer</h2>
+    <p class="lead">Under Construction. See below for stage progression.
+        <br>
+        HTML/CSS | AngularForms | CRUD | Dex | Analysis</p>
+<div ng-init="hello='world'"></div>
+
+      <h3>If angular works, this should say world3: {{hello}}{{1+2}}</h3>
+  </div>
+
+	
+  <!--THIS ROW CONTAINS BOTH LEFT AND RIGHT ELEMENTS: SEE BELOW-->
+  <div class="row">
+      <!--POKEMON CREATE/UPDATE INTERFACE-->
+    <div class="col-lg-6">
+
+
+      <h2>Select Your Pokemon</h2>
+       <p>Here's what you have selected.</p>
+        <div class="well">
+     <div class="row"> <div class="col-lg-4"><p><img src="http://serebii.net/xy/pokemon/652.png" alt="Pokemon Name" height="120" width="120">
+        </p></div>
+       <br>
+<h4><p><strong>Name:</strong>  Pokemon.Name </p></h4>
+
+       <h4><p><strong>Type:</strong>  Pokemon.Type 1 and 2 </p></h4>
+         <h4><p><strong>Moveset:</strong>  Pokemon.Moveset </p></h4>
+         </div>
+
+
+
+
+        </div>
+
+        <div class="well">
+
+                <h4>Pokemon Create/Edit Controller</h4>
+
+
+            <!--BUTTON HTML by BOOTSTRAP-->
+
+
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Select Pokemon!</button>
+      </span>
+                    </div>
+            <p>---------------</p>
+             <h4>Select Your Moveset</h4>
+            <!--Select move--><div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                Select Your First Move
+            </button>
+            <br>
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                Select Your Second Move
+            </button>
+            <br>
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                Select Your Third Move
+            </button>
+            <br>
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                Select Your Fourth Move
+            </button>
+        </div>
+
+        </div>
+      <div class="row">
+      <div class="col-lg-4">
+
+
+        </div>
+
+
+
+
+</div>
+
+
+
+
+<!--again with the crappy not-working bootstrap dropdown-->
+
+        <!--I'LL FIGURE OUT HOW TO ADD THE OPTIONS IN LATER-->
+      </div>
+
+      <!--PKMNTEAM VIEWER-->
+    <div class="col-lg-6">
+
+
+      <h2>View Your Team here!</h2>
+      <p>You can Add Pokemon to your team. Try it!</p>
+      <!--FIRST POKEMON-->
+<div class="well">
+            <div class="floatLeft">
+            <img src="http://serebii.net/xy/pokemon/652.png" alt="Pokemon Name" height="120" width="120"></div>
+
+            <div class="rightMargin">
+            <h4><strong>#1:  First Pokemon Name </strong></h4>
+            <p><h4><strong>Type</strong></h4>
+            Water LOL
+            <h4><strong>Moveset</strong></h4>
+                <ul class="list-unstyled">
+                    <li>1.  move </li>
+                    <li>2. </li>
+                    <li>3. </li>
+                    <li>4. </li>
+                    </ul>
+            </p>
+            <div>
+                <button type="button" class="btn btn-default" aria-expanded="false">
+                    Edit
+                </button>
+                <button type="button" class="btn btn-danger" aria-expanded="false">
+                    Delete
+                </button>
+                </div>
+</div>
+
+</div>
+<div class="well">
+    <button type="button" class="btn btn-default" aria-label="Left Align">
+        <i class="glyphicon glyphicon-plus-sign"></i> Add A Pokemon
+
+    </button>
+
+</div>
+    </div>
+    </div>
+
+  
+  <hr>
+
+</div> <!-- /container -->
+</div>
+</body>
+</html>

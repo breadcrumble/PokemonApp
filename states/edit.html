@@ -1,0 +1,52 @@
+<!-- NOTE edit  -->
+<div class="panel panel-warning fixed-height">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <strong>EDIT EXISTING POKEMON - #{{pokemon.ndex}}: {{pokemon.name |
+        uppercase}}</strong>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <table>
+      <tr>
+        <td>
+          <img align="left" alt="" class="pokemon-avatar"
+            ng-src="http://www.serebii.net/xy/pokemon/{{pokemon.ndex}}.png"/>
+          <hr></hr>
+          <h4>
+            <strong>Type:</strong>
+            <i>{{pokemon.type[0] | titlecase}}
+              | {{pokemon.type[1] | titlecase}}</i></h4>
+        </td>
+        <td>
+          <form name="editPokemon" ng-submit="saveChanges(pokemon)">
+            <h4>
+              <strong>Search By Name</strong>
+            </h4>
+            <input class="form-control" name="some_name" ng-model="pokemon.name" type="text"
+              value=""></input>
+            <hr></hr>
+            <h4>
+              <strong>Select Moveset</strong>
+            </h4>
+            <input class="form-control" name="some_name" ng-model="pokemon.moves[0]" type="text"
+              value=""></input>
+            <input class="form-control" name="some_name" ng-model="pokemon.moves[1]" type="text"
+              value=""></input>
+            <input class="form-control" name="some_name" ng-model="pokemon.moves[2]" type="text"
+              value=""></input>
+            <input class="form-control" name="some_name" ng-model="pokemon.moves[3]" type="text"
+              value=""></input>
+            <!-- <input class="btn btn-success btn-sm" type="submit" name="some_name" value="Submit"> -->
+            <!-- TODO uh how do I put the input which has the correct bootstrap look? -->
+            <input class="btn btn-success btn-sm" type="submit" value="Save Changes"></input>
+            <button aria-label="Left Align" class="btn btn-danger btn-sm" type="button">
+              <span aria-hidden="true" class="glyphicon glyphicon-ban-circle"></span>
+              Delete Pokemon
+            </button>
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

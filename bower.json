@@ -1,0 +1,21 @@
+{
+  "name": "ui-dev",
+  "version": "0.0.0",
+  "authors": [
+    "Amin Meyghani <meyghania@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "lib"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.2",
+    "angular": "1.2.16",
+    "angular-bootstrap": "~0.12.0"
+  }
+}
