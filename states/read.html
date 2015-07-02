@@ -12,18 +12,21 @@
         <td class="parent" width="45%">
           <div class="center-align">
             <img alt="{{pokemon.data.name}}" class="pokemon-avatar"
-              ng-src="http://www.serebii.net/xy/pokemon/{{pokemon.data.ndex | zeroPadding}}.png"/>
+              ng-src="http://www.serebii.net/xy/pokemon/{{pokemon.data.ndex |
+              zeroPadding}}.png"/>
             <h4>
               <strong>Type:
               </strong>
               <i>{{pokemon.data.type[0] | titlecase}}</i>
               <i ng-show="pokemon.data.type[1]">| {{pokemon.data.type[1] | titlecase}}</i>
             </h4>
-            <button aria-label="Left Align" class="btn btn-default btn-sm" type="button" ng-click="editPokemon(pokemon)">
+            <button aria-label="Left Align" class="btn btn-default btn-sm"
+              ng-click="editPokemon(pokemon)" type="button">
               <span aria-hidden="true" class="glyphicon glyphicon-edit"></span>
               Edit
             </button>
-            <button aria-label="Left Align" class="btn btn-danger btn-sm" type="button">
+            <button aria-label="Left Align" class="btn btn-danger btn-sm"
+              ng-really-click="removeFromTeam(pokemon)" ng-really-message="Really remove this Pokemon from your team?" type="button">
               <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
               Delete
             </button>
@@ -34,21 +37,19 @@
             <!-- originally i put .center-align -->
             <h3><strong>{{pokemon.data.name}}</strong></h3>
             <hr></hr>
-              <h4>
-                <strong>Moveset:
-                </strong>
-                <br> </br>
-                  <li class="unstyled" ng-repeat="move in pokemon.data.moves">
-                    <i>
-                      {{move | titlecase}}
-                    </i></li>
-                    </h4>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                {{pokemon | json }}
-              </tr>
-            </table>
+            <h4>
+              <strong>Moveset:
+              </strong>
+              <br></br>
+              <li class="unstyled" ng-repeat="move in pokemon.data.moves">
+                <i>
+                  {{move | titlecase}}
+                </i>
+              </li>
+            </h4>
           </div>
-        </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

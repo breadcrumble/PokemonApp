@@ -1,4 +1,4 @@
-First Commit: 2 July 2015
-
-Data for learnsets from: https://github.com/Zarel/Pokemon-Gen-6-Learnsets
-Special thanks to this Json validator: http://codebeautify.org/jsonvalidate
+Special thanks to the following people, whose resources have made developing this project way easier:
+1. JSON Validator http://codebeautify.org/jsonvalidate
+2. Data for learnsets from: https://github.com/Zarel/Pokemon-Gen-6-Learnsets
+3. Angular Directive for Confirmation Dialogues. https://gist.github.com/asafge/7430497
