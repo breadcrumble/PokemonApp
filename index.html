@@ -39,8 +39,6 @@
     <div class="jumbotron">
       <h1>Pokemon Analyzer {{1+2}}</h1>
       <p>You build your team and we analyze it for you!</p>
-
-
       <p><a class="btn btn-primary btn-lg" href="#select" role="button">Select Your
           Pokemon</a></p>
     </div>
@@ -86,19 +84,21 @@
         <small>We'll check for team strengths and weaknesses</small>
       </h1>
     </div>
-    <!-- TODO I probably have to use an angular component for this instead>.> -->
-    <div class="panel panel-default">
-      <ul class="nav nav-pills nav-justified">
-        <li class="active" role="presentation">
-          <a href="#">Overall Analysis</a>
-        </li>
-        <li role="presentation"><a href="#">Strengths</a></li>
-        <li role="presentation"><a href="#">Weaknesses</a></li>
-      </ul>
-      <div class="panel-body">
-        Basic panel example
-      </div>
-    </div>
+
+
+    <tabset justified="true" type="pills">
+      <tab heading="Overall Analysis">
+        <div overall></div>
+      </tab>
+      <tab heading="Strengths">
+      <div strengths></div>
+      </tab>
+      <tab heading="Weaknesses">
+        <div weakness>
+        </div>
+      </tab>
+    </tabset>
+
     <hr>
     <div class="page-header" id="share">
       <h1>Share Your Results
@@ -108,12 +108,15 @@
     <hr>
     <div class="page-header" id="credits">
       <h1>Credits
-        <small>About this proj ect</small>
+        <small>About this project</small>
       </h1>
       <p>
         Pokemon does not belong to me. App created by Hui Suan Chung, 2015
       </p>
     </div>
+
+
+
   </div>
   <!-- container div -->
 

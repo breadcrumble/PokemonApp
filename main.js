@@ -66,9 +66,8 @@ angular.module('app', ['ui.bootstrap'])
         return pkmn.index == pokemon.index;
       });
       var name = $scope.firstTeam[index].data.name + "";
-      var nameString = name;
-      var arrays = $scope.learnset[nameString];
-      return arrays;
+      var array = $scope.learnset[name];
+      return array;
     };
 
     //NOTE Controlling state change functions
@@ -100,12 +99,7 @@ angular.module('app', ['ui.bootstrap'])
       var takenOutPokemon = $scope.firstTeam.splice(pkmnIndex, 1);
       return arrays;
     };
-    //TODO alert for delete function
-    // $scope.alertMe = function() {
-    //   setTimeout(function() {
-    //     $window.alert('You\'ve selected the alert tab!');
-    //   });
-    // };
+
   }) //END NG CONTROLLER
   .filter('titlecase', function() {
     return function(s) {
@@ -116,7 +110,6 @@ angular.module('app', ['ui.bootstrap'])
     };
   })
   .directive("blank", function() {
-
     return {
       templateUrl: 'states/blank.html'
     };
@@ -135,7 +128,23 @@ angular.module('app', ['ui.bootstrap'])
     return {
       templateUrl: 'states/read.html'
     };
-  }).filter('zeroPadding', function() {
+  })
+  .directive("overall", function() {
+    return {
+      templateUrl: 'states/overall.html'
+    };
+  })
+  .directive("strengths", function() {
+    return {
+      templateUrl: 'states/strengths.html'
+    };
+  })
+  .directive("weakness", function() {
+    return {
+      templateUrl: 'states/weakness.html'
+    };
+  })
+  .filter('zeroPadding', function() {
 
     //padding method
     var zeroPadding = function(number) {
@@ -145,9 +154,7 @@ angular.module('app', ['ui.bootstrap'])
       };
       return numString;
     };
-
     return zeroPadding;
-
   })
   .directive('ngReallyClick', [function() {
     return {
