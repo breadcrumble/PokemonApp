@@ -1,0 +1,81 @@
+<!-- NOTE add func -->
+<div class="panel panel-success fixed-height">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <strong>ADD NEW POKEMON</strong><strong ng-show="pokemon.data.name"> - #{{pokemon.data.ndex}}: {{pokemon.data.name}}</strong>
+    </h3>
+  </div>
+  <table class="table" width="100%">
+    <tbody>
+      <tr>
+        <td class="parent" width="45%">
+          <div class="center-align">
+
+            <div ng-show="!pokemon.data.type">
+              <br>
+              <img src="lib/images/pokeball.png" alt="No Pokemon Selected Yet." />
+              <h4 class="center-align">No Pokemon has
+                been selected yet!</h4>
+            </div>
+
+            <div ng-show="pokemon.data.type">
+
+              <img class="pokemon-avatar"
+                ng-src="http://www.serebii.net/xy/pokemon/{{pokemon.data.ndex |
+                zeroPadding}}.png"></img>
+
+                <h4>
+                  <strong>Type:
+                  </strong>
+                  <i>{{pokemon.data.type[0] | titlecase}}</i>
+                  <i ng-show="pokemon.data.type[1]">| {{pokemon.data.type[1] | titlecase}}</i>
+                </h4>
+
+            </div>
+          </div>
+        </td>
+
+        <td class="parent" width="55%">
+          <div class="center-align">
+            <!-- for float right class -->
+            <form name="addPokemon" ng-submit="saveChanges(pokemon)">
+              <h4>
+                <strong>Search By Name</strong>
+              </h4>
+              <input autocomplete="off" class="form-control" name="some_name"
+                ng-model="pokemon.data" required type="text" typeahead-editable="false"
+                typeahead="pkmn as pkmn.name for pkmn in pokedex | filter:$viewValue | limitTo:8" value=""></input>
+              <hr></hr>
+              <h4>
+                <strong>Select Moveset</strong>
+              </h4>
+              <input autocomplete="off" class="form-control" name="some_name"
+                ng-model="pokemon.data.moves[0]" type="text" typeahead-editable="false"
+                typeahead="move as move for move in getAttackList(pokemon) | filter:$viewValue |
+                limitTo:8" value=""></input>
+              <input autocomplete="off" class="form-control" name="some_name"
+                ng-model="pokemon.data.moves[1]" type="text" typeahead-editable="false"
+                typeahead="move as move for move in getAttackList(pokemon) | filter:$viewValue |
+                limitTo:8" value=""></input>
+              <input autocomplete="off" class="form-control" name="some_name"
+                ng-model="pokemon.data.moves[2]" type="text" typeahead-editable="false"
+                typeahead="move as move for move in getAttackList(pokemon) | filter:$viewValue |
+                limitTo:8" value=""></input>
+              <input autocomplete="off" class="form-control" name="some_name"
+                ng-model="pokemon.data.moves[3]" type="text" typeahead-editable="false"
+                typeahead="move as move for move in getAttackList(pokemon) | filter:$viewValue |
+                limitTo:8" value=""></input>
+
+              <input class="btn btn-success btn-sm" type="submit" value="Add Pokemon"></input>
+              <button aria-label="Left Align" class="btn btn-danger btn-sm" type="button"
+              ng-click="removeFromTeam(pokemon)">
+                <span aria-hidden="true" class="glyphicon glyphicon-ban-circle"></span>
+                Cancel
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

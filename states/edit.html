@@ -1,0 +1,74 @@
+<!-- NOTE edit  -->
+<div class="panel panel-warning fixed-height">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <strong>EDIT EXISTING POKEMON</strong>
+      <strong ng-show="pokemon.data.name">
+        - #{{pokemon.data.ndex}}: {{pokemon.data.name}}</strong>
+    </h3>
+  </div>
+  <table class="table" width="100%">
+    <tbody>
+      <tr>
+        <td class="parent" width="45%">
+          <div class="center-align">
+            <div ng-show="!pokemon.data.type">
+              <br>
+                <img alt="No Pokemon Selected Yet." src="lib/images/pokeball.png"/>
+                <h4 class="center-align">First Select A Pokemon!</h4>
+              </div>
+              <div ng-show="pokemon.data.type">
+                <img class="pokemon-avatar"
+                  ng-src="http://www.serebii.net/xy/pokemon/{{pokemon.data.ndex |
+                  zeroPadding}}.png"></img>
+                <h4>
+                  <strong>Type:
+                  </strong>
+                  <i>{{pokemon.data.type[0] | titlecase}}</i>
+                  <i ng-show="pokemon.data.type[1]">| {{pokemon.data.type[1] | titlecase}}</i>
+                </h4>
+              </div>
+            </div>
+          </td>
+          <td class="parent" width="55%">
+            <form name="editPokemon" ng-submit="saveChanges(pokemon)">
+              <h4>
+                <strong>Search By Name</strong>
+              </h4>
+              <input autocomplete="off" class="form-control" name="some_name"
+                ng-model="pokemon.data" required type="text" typeahead-editable="false"
+                typeahead="pkmn as pkmn.name for pkmn in pokedex | filter:$viewValue | limitTo:8" value=""></input>
+              <hr></hr>
+              <h4>
+                <strong>Select Moveset</strong>
+              </h4>
+              <input autocomplete="off" class="form-control" name="some_name"
+                ng-model="pokemon.data.moves[0]" type="text" typeahead-editable="false"
+                typeahead="move as move for move in getAttackList(pokemon) | filter:$viewValue |
+                limitTo:8" value=""></input>
+              <input autocomplete="off" class="form-control" name="some_name"
+                ng-model="pokemon.data.moves[1]" type="text" typeahead-editable="false"
+                typeahead="move as move for move in getAttackList(pokemon) | filter:$viewValue |
+                limitTo:8" value=""></input>
+              <input autocomplete="off" class="form-control" name="some_name"
+                ng-model="pokemon.data.moves[2]" type="text" typeahead-editable="false"
+                typeahead="move as move for move in getAttackList(pokemon) | filter:$viewValue |
+                limitTo:8" value=""></input>
+              <input autocomplete="off" class="form-control" name="some_name"
+                ng-model="pokemon.data.moves[3]" type="text" typeahead-editable="false"
+                typeahead="move as move for move in getAttackList(pokemon) | filter:$viewValue |
+                limitTo:8" value=""></input>
+              <!-- <input class="btn btn-success btn-sm" type="submit" name="some_name" value="Submit"> -->
+              <!-- TODO uh how do I put the input which has the correct bootstrap look? -->
+              <input class="btn btn-success btn-sm" type="submit" value="Save Changes"></input>
+              <button aria-label="Left Align" class="btn btn-danger btn-sm"
+                ng-really-click="removeFromTeam(pokemon)" ng-really-message="Really remove this Pokemon from your team?" type="button">
+                <span aria-hidden="true" class="glyphicon glyphicon-ban-circle"></span>
+                Delete Pokemon
+              </button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

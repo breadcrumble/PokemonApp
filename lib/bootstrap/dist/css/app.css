@@ -1,0 +1,39 @@
+.pokemon-avatar {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.unstyled {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+input {
+	margin-bottom: 5px;
+}
+td {
+	padding: 15px;
+	vertical-align: top;
+}
+
+.parent {
+	text-align: center;
+	vertical-align: middle;
+}
+.parent-float-right{
+	 text-align:right;
+}
+
+.center-align {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.float-right {
+	margin-left: auto;
+}
+/*for fixed height*/
+.fixed-height{
+	height: 475px;
+	max-height: 475px;
+}
