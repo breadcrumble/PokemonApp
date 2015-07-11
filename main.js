@@ -141,9 +141,9 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
     };
 
     //WIP TODO lol wtf again
-    $scope.typeStrengthWeakness = function() {
+    $scope.typeStrengthWeakness = function(array) {
       var swArray = [], swObject= {};
-
+      swObject = _.object($scope.listOfTypes, array)
       // for (var i = 0; i < 18; i++) {
       //   var swObject = {
       //     "type": $scope.listOfTypes[i];
@@ -151,7 +151,7 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
       //   };
       //   strengthWeaknessObject.push(swObject);
       // }
-      return swArray;
+      return swObject;
     };
 
 
@@ -192,10 +192,6 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
     //   return compiledArray;
     //
     //   };
-
-
-
-    //TODO looks like we may not need this after all..?
 
 
     //NOTE Controlling state change functions
