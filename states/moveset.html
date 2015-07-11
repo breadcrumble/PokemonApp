@@ -4,14 +4,8 @@
       <th>
         <h4><strong>Pokemon</strong></h4>
       </th>
-      <th>
+      <th colspan="4">
         <h4><strong>Moveset</strong></h4>
-      </th>
-      <th>
-        <h4><strong>Super Effective</strong></h4>
-      </th>
-      <th>
-        <h4><strong>Not Very Effective</strong></h4>
       </th>
     </tr>
   </thead>
@@ -23,22 +17,11 @@
         zeroPadding}}.png"/><br>
         <strong>{{pokemon.data.name}}</strong>
       </td>
-      <td>
-        {{pokemon.data.moves[0]}}
-		<br>
-		{{pokemon.data.moves[1]}}
-		<br>
-		{{pokemon.data.moves[2]}}
-		<br>
-		{{pokemon.data.moves[3]}}
-
-        </td>
-        <td>
-          coming soon
-        </td>
-		<td>
-		  coming soon
-		</td>
+      <td ng-repeat="data in getMovesetData(pokemon)">
+        <strong>{{data.Name}}</strong>
+        <br>{{data.Type}}
+          <br>{{data.Category}}
+            <br>{{data.Effect}}</td>
           </tr>
         </tbody>
       </table>
