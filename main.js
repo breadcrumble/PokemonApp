@@ -1,4 +1,4 @@
-angular.module('app', ['ui.bootstrap'])
+angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
   .factory('_', function() {
     return window._;
   })
@@ -20,44 +20,51 @@ angular.module('app', ['ui.bootstrap'])
     $http.get('lib/json/learnset.json').success(function(data) {
       $scope.learnset = data;
     });
+    $http.get('lib/json/attackMatrix.json').success(function(data) {
+      $scope.attackMatrix = data;
+    });
+    $http.get('lib/json/typeMatrix.json').success(function(data) {
+      $scope.typeMatrix = data;
+    });
 
     //NOTE model data
-    // $scope.firstTeam = [{
-    //    "data": {
-    //      "ndex": 652,
-    //      "name": "Chesnaught",
-    //      "type": ["fighting", "grass"],
-    //      "moves": ["Rollout", "Spiky Shield", "Mud Shot", "Wood Hammer"],
-    //    },
-    //    "appState": "read",
-    //    "index": 0
-    //  }, {
-    //    "data": {
-    //      "ndex": 655,
-    //      "name": "Delphox",
-    //      "type": ["psychic", "fire"],
-    //      "moves": ["Flamethrower", "Sunny Day", "Psychic", "Mystical Fire"],
-    //    },
-    //    "appState": "read",
-    //    "index": 1
-    //  }, {
-    //    "data": {
-    //      "ndex": 658,
-    //      "name": "Greninja",
-    //      "type": ["water", "dark"],
-    //      "moves": ["Water Shuriken", "Substitute", "Extrasensory", "Spikes"],
-    //    },
-    //    "appState": "read",
-    //    "index": 2
-    //  }, {
-    //    "appState": "blank",
-    //    "index": 3
-    //  }];
+    $scope.firstTeam = [{
+      "appState": "read",
+      "index": 0,
+      "data": {
+        "ndex": 652,
+        "name": "Chesnaught",
+        "type": ["Grass", "Fighting"],
+        "moves": {
+          "0": "Spiky Shield",
+          "1": "Leech Seed",
+          "2": "Pin Missile",
+          "3": "Belly Drum"
+        }
+      }
+    }, {
+      "appState": "read",
+      "index": 1,
+      "data": {
+        "ndex": 655,
+        "name": "Delphox",
+        "type": ["Fire", "Psychic"],
+        "moves": {
+          "0": "Flamethrower",
+          "1": "Flame Charge",
+          "2": "Lucky Chant",
+          "3": "Shadow Ball"
+        }
+      }
+    },  {
+      "appState": "blank",
+      "index": 2
+    }];
 
     // NOTE this is just for testing and debugging. only use one scope.firstTeam at a time
-    $scope.firstTeam = [{
-      "appState": "blank"
-    }];
+    // $scope.firstTeam = [{
+    //   "appState": "blank"
+    // }];
 
     //NOTE to get array of attacks
     $scope.getAttackList = function(pokemon) {
@@ -69,77 +76,94 @@ angular.module('app', ['ui.bootstrap'])
       return array;
     };
 
-
-    $scope.getTypesArray = function() {
+    //To retrieve data of the moveset WIP
+    $scope.getMovesetData = function(pokemon) {
       var array = [];
-      for (var i = 0; i < $scope.firstTeam.length; i++) {
-        if ($scope.firstTeam[i].appState == "read") {
-          array.push($scope.firstTeam[i].data.type);
+      for (var i = 0; i < 4; i++) {
+        var move,moveData;
+        if (pokemon.data.moves[i]) {
+          move = pokemon.data.moves[i];
+          move = move.replace(/\s+/g, '').toLowerCase();
+          moveData = $scope.attackDex[move];
+          array.push(moveData);
         }
       }
-      var flatArray = _.compact(_.flatten(array));
-      return flatArray;
+      // var moveData = $scope.attackDex.absorb;
+      return array;
     };
 
-    $scope.countNumArray = function(arr) {
-      var a = [],
-        b = [],
-        prev;
-      arr.sort();
-      for (var i = 0; i < arr.length; i++) {
-        if (arr[i] !== prev) {
-          a.push(arr[i]);
-          b.push(1);
-        } else {
-          b[b.length - 1]++;
-        }
-        prev = arr[i];
-      }
-      var compiledArray = [];
-      for (var j = 0; j< a.length; j++) {
-        var tempObject = {
-          "name": a[j],
-          "numCount": b[j]}
-          compiledArray.push(tempObject);
-      }
-      return compiledArray;
+    // NOTE this is the thing for the old overall panel
+    // $scope.getTypesArray = function() {
+    //   var array = [];
+    //   for (var i = 0; i < $scope.firstTeam.length; i++) {
+    //     if ($scope.firstTeam[i].appState == "read") {
+    //       array.push($scope.firstTeam[i].data.type);
+    //     }
+    //   }
+    //   var flatArray = _.compact(_.flatten(array));
+    //   return flatArray;
+    // };
+    //
+    // $scope.countNumArray = function(arr) {
+    //   var a = [],
+    //     b = [],
+    //     prev;
+    //   arr.sort();
+    //   for (var i = 0; i < arr.length; i++) {
+    //     if (arr[i] !== prev) {
+    //       a.push(arr[i]);
+    //       b.push(1);
+    //     } else {
+    //       b[b.length - 1]++;
+    //     }
+    //     prev = arr[i];
+    //   }
+    //   var compiledArray = [];
+    //   for (var j = 0; j< a.length; j++) {
+    //     var tempObject = {
+    //       "name": a[j],
+    //       "numCount": b[j]}
+    //       compiledArray.push(tempObject);
+    //   }
+    //   return compiledArray;
+    //
+    //   };
 
-      };
 
 
-
-
-    $scope.listOfTypes = ["Bug",
-      "Dark",
-      "Dragon",
-      "Electric",
-      "Fairy",
-      "Fighting",
-      "Fire",
-      "Flying",
-      "Ghost",
-      "Grass",
-      "Ground",
-      "Ice",
-      "Normal",
-      "Poison",
-      "Psychic",
-      "Rock",
-      "Steel",
-      "Water"
-    ];
-
+    //TODO looks like we may not need this after all..?
+    // $scope.listOfTypes = ["Bug",
+    //   "Dark",
+    //   "Dragon",
+    //   "Electric",
+    //   "Fairy",
+    //   "Fighting",
+    //   "Fire",
+    //   "Flying",
+    //   "Ghost",
+    //   "Grass",
+    //   "Ground",
+    //   "Ice",
+    //   "Normal",
+    //   "Poison",
+    //   "Psychic",
+    //   "Rock",
+    //   "Steel",
+    //   "Water"
+    // ];
+    //
 
     //NOTE Controlling state change functions
 
     $scope.shouldShowTypes = false;
     $scope.toggleShowTypes = function() {
-      if ($scope.shouldShowTypes) {
-        $scope.shouldShowTypes = false;
-      }
-      else {
-        $scope.shouldShowTypes = true;
-      }
+      // if ($scope.shouldShowTypes) {
+      //   $scope.shouldShowTypes = false;
+      // }
+      // else {
+      //   $scope.shouldShowTypes = true;
+      // }
+      $scope.shouldShowTypes = !$scope.shouldShowTypes;
     };
 
     $scope.addPokemon = function(pokemon) {
@@ -200,9 +224,9 @@ angular.module('app', ['ui.bootstrap'])
       templateUrl: 'states/read.html'
     };
   })
-  .directive("overall", function() {
+  .directive("moveset", function() {
     return {
-      templateUrl: 'states/overall.html'
+      templateUrl: 'states/moveset.html'
     };
   })
   .directive("strengths", function() {

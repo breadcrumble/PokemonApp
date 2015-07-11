@@ -7,6 +7,9 @@
   <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
   <link href="lib/bootstrap/dist/css/app.css" rel="stylesheet">
   <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-animate.min.js"></script>
+  <script src="lib/angular/TweenMax.min.js"></script>
+  <script src="lib/angular/ngFx.js"></script>
   <script src="lib/angular/underscore-min.js"></script>
   <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="main.js"></script>
@@ -39,6 +42,8 @@
     <div class="jumbotron">
       <h1>Pokemon Analyzer {{1+2}}</h1>
       <p>You build your team and we analyze it for you!</p>
+      <strong>{{attackDex.absorb.type}}</strong>
+
       <p><a class="btn btn-primary btn-lg" href="#select" role="button">Select Your
           Pokemon</a></p>
     </div>
@@ -87,13 +92,13 @@
 
 
     <tabset justified="true" type="pills">
-      <tab heading="Overall Analysis">
-        <div overall></div>
+      <tab heading="Full Details">
+        <div moveset></div>
       </tab>
-      <tab heading="Strengths">
+      <tab heading="Pokemon Type">
       <div strengths></div>
       </tab>
-      <tab heading="Weaknesses">
+      <tab heading="Moveset">
         <div weakness>
         </div>
       </tab>
