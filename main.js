@@ -27,6 +27,27 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
       $scope.typeMatrix = data;
     });
 
+    $scope.listOfTypes = ["Bug",
+      "Dark",
+      "Dragon",
+      "Electric",
+      "Fairy",
+      "Fighting",
+      "Fire",
+      "Flying",
+      "Ghost",
+      "Grass",
+      "Ground",
+      "Ice",
+      "Normal",
+      "Poison",
+      "Psychic",
+      "Rock",
+      "Steel",
+      "Water"
+    ];
+
+
     //NOTE model data
     $scope.firstTeam = [{
       "appState": "read",
@@ -56,7 +77,7 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
           "3": "Shadow Ball"
         }
       }
-    },  {
+    }, {
       "appState": "blank",
       "index": 2
     }];
@@ -76,11 +97,11 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
       return array;
     };
 
-    //To retrieve data of the moveset WIP
+    //NOTE To retrieve data of the moveset
     $scope.getMovesetData = function(pokemon) {
       var array = [];
       for (var i = 0; i < 4; i++) {
-        var move,moveData;
+        var move, moveData;
         if (pokemon.data.moves[i]) {
           move = pokemon.data.moves[i];
           move = move.replace(/\s+/g, '').toLowerCase();
@@ -88,9 +109,52 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
           array.push(moveData);
         }
       }
-      // var moveData = $scope.attackDex.absorb;
       return array;
     };
+    //NOTE for retrieving strength/wk of pokemon type
+    $scope.getStrengthAndWeakness = function(pokemon) {
+      var pokemonType, test, array, finalArray;
+      finalArray, array = [];
+      for (var i = 0; i < 2; i++) {
+        pokemonType = pokemon.data.type[i];
+        test = $scope.typeMatrix[pokemonType];
+
+        for (var j = 0; j < test.length; j++) {
+          if (array.length < 18) {
+            array[j] = test[j];
+          } else if (array.length >= 18) {
+            array[j + 18] = test[j];
+          }
+
+        }
+
+      }
+      return array;
+    };
+    $scope.multiplyArray = function(array) {
+      var finalArray = [];
+
+      for (var i = 0; i < 18; i++) {
+        finalArray[i] = array[i] * array[i + 18];
+      }
+      return finalArray;
+    };
+
+    //WIP TODO lol wtf again
+    $scope.typeStrengthWeakness = function() {
+      var swArray = [], swObject= {};
+
+      // for (var i = 0; i < 18; i++) {
+      //   var swObject = {
+      //     "type": $scope.listOfTypes[i];
+      //     "numSW": typeArray[i];
+      //   };
+      //   strengthWeaknessObject.push(swObject);
+      // }
+      return swArray;
+    };
+
+
 
     // NOTE this is the thing for the old overall panel
     // $scope.getTypesArray = function() {
@@ -132,29 +196,9 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
 
 
     //TODO looks like we may not need this after all..?
-    // $scope.listOfTypes = ["Bug",
-    //   "Dark",
-    //   "Dragon",
-    //   "Electric",
-    //   "Fairy",
-    //   "Fighting",
-    //   "Fire",
-    //   "Flying",
-    //   "Ghost",
-    //   "Grass",
-    //   "Ground",
-    //   "Ice",
-    //   "Normal",
-    //   "Poison",
-    //   "Psychic",
-    //   "Rock",
-    //   "Steel",
-    //   "Water"
-    // ];
-    //
+
 
     //NOTE Controlling state change functions
-
     $scope.shouldShowTypes = false;
     $scope.toggleShowTypes = function() {
       // if ($scope.shouldShowTypes) {
