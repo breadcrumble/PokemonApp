@@ -16,12 +16,19 @@
         ng-src="http://www.serebii.net/xy/pokemon/{{pokemon.data.ndex |
         zeroPadding}}.png"/><br>
         <strong>{{pokemon.data.name}}</strong>
+        <br>
+        <i>{{pokemon.data.type[0] | titlecase}}</i>
+        <i ng-show="pokemon.data.type[1]">| {{pokemon.data.type[1] | titlecase}}</i>
       </td>
       <td ng-repeat="data in getMovesetData(pokemon)">
         <strong>{{data.Name}}</strong>
-        <br>{{data.Type}}
-          <br>{{data.Category}}
-            <br>{{data.Effect}}</td>
+        <br>Type: {{data.Type}} | Category: {{data.Category}}
+            <br>
+            Power: {{data.Power}}
+            <br>
+            Accuracy: {{data.Accuracy}} <br>
+            {{data.Effect}}
+            </td>
           </tr>
         </tbody>
       </table>

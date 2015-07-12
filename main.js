@@ -111,100 +111,82 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
       }
       return array;
     };
+
+    //TODO 1. should the scope be for each move or for each pokemon?
+    $scope.getSWForMoveset = function(move) {
+      // 1. check if the move category is NOT status
+      // 2. lookup type matrix
+      // 3. show it.
+    };
+
     //NOTE for retrieving strength/wk of pokemon type
     $scope.getStrengthAndWeakness = function(pokemon) {
-      var pokemonType, test, array, finalArray;
-      finalArray, array = [];
-      for (var i = 0; i < 2; i++) {
-        pokemonType = pokemon.data.type[i];
-        test = $scope.typeMatrix[pokemonType];
+      var pokemonType, test, array = [],
+        finalArray = [],
+        x;
+      x = pokemon.data.type.length;
+      for (var i = 0; i < x; i++) {
+        if (pokemon.data.type[i] != "") {
+          pokemonType = pokemon.data.type[i];
+          test = $scope.typeMatrix[pokemonType];
 
-        for (var j = 0; j < test.length; j++) {
-          if (array.length < 18) {
-            array[j] = test[j];
-          } else if (array.length >= 18) {
-            array[j + 18] = test[j];
+          for (var j = 0; j < test.length; j++) {
+            if (array.length < 18) {
+              array[j] = test[j];
+            } else if (array.length >= 18) {
+              array[j + 18] = test[j];
+            }
           }
-
         }
-
       }
       return array;
     };
     $scope.multiplyArray = function(array) {
       var finalArray = [];
-
-      for (var i = 0; i < 18; i++) {
-        finalArray[i] = array[i] * array[i + 18];
+      if (array.length > 18) {
+        for (var i = 0; i < 18; i++) {
+          finalArray[i] = array[i] * array[i + 18];
+        }
+      } else {
+        finalArray = array;
       }
       return finalArray;
     };
 
-    //WIP TODO lol wtf again
+    //NOTE it works
     $scope.typeStrengthWeakness = function(array) {
-      var swArray = [], swObject= {};
-      swObject = _.object($scope.listOfTypes, array)
-      // for (var i = 0; i < 18; i++) {
-      //   var swObject = {
-      //     "type": $scope.listOfTypes[i];
-      //     "numSW": typeArray[i];
-      //   };
-      //   strengthWeaknessObject.push(swObject);
-      // }
+      var swObject = _.object($scope.listOfTypes, array);
       return swObject;
     };
 
+    //TODO refactor out the $scope and put var for some of the afn.
 
-
-    // NOTE this is the thing for the old overall panel
-    // $scope.getTypesArray = function() {
-    //   var array = [];
-    //   for (var i = 0; i < $scope.firstTeam.length; i++) {
-    //     if ($scope.firstTeam[i].appState == "read") {
-    //       array.push($scope.firstTeam[i].data.type);
-    //     }
-    //   }
-    //   var flatArray = _.compact(_.flatten(array));
-    //   return flatArray;
-    // };
-    //
-    // $scope.countNumArray = function(arr) {
-    //   var a = [],
-    //     b = [],
-    //     prev;
-    //   arr.sort();
-    //   for (var i = 0; i < arr.length; i++) {
-    //     if (arr[i] !== prev) {
-    //       a.push(arr[i]);
-    //       b.push(1);
-    //     } else {
-    //       b[b.length - 1]++;
-    //     }
-    //     prev = arr[i];
-    //   }
-    //   var compiledArray = [];
-    //   for (var j = 0; j< a.length; j++) {
-    //     var tempObject = {
-    //       "name": a[j],
-    //       "numCount": b[j]}
-    //       compiledArray.push(tempObject);
-    //   }
-    //   return compiledArray;
-    //
-    //   };
-
+    //NOTE overall team
+    $scope.overallSW = function() {
+      var typeArray = [],
+        finalArray = [],
+        x = $scope.firstTeam.length,
+        swObj;
+      for (var i = 0; i < (x - 1); i++) {
+        var pkmn = $scope.firstTeam[i];
+        var array1 = $scope.getStrengthAndWeakness(pkmn);
+        array1 = $scope.multiplyArray(array1);
+        typeArray.push(array1);
+      }
+      for (var j = 0; j < 18; j++) {
+        for (var i = 0; i < x - 1; i++) {
+          if (!finalArray[j]) {
+            finalArray[j] = typeArray[i][j];
+          } else {
+            finalArray[j] = finalArray[j] + typeArray[i][j];
+          }
+        }
+      }
+      swObj = $scope.typeStrengthWeakness(finalArray)
+      return swObj;
+    };
 
     //NOTE Controlling state change functions
-    $scope.shouldShowTypes = false;
-    $scope.toggleShowTypes = function() {
-      // if ($scope.shouldShowTypes) {
-      //   $scope.shouldShowTypes = false;
-      // }
-      // else {
-      //   $scope.shouldShowTypes = true;
-      // }
-      $scope.shouldShowTypes = !$scope.shouldShowTypes;
-    };
 
     $scope.addPokemon = function(pokemon) {
       if ($scope.firstTeam.length < 7) {
@@ -271,12 +253,12 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
   })
   .directive("strengths", function() {
     return {
-      templateUrl: 'states/strengths.html'
+      templateUrl: 'states/types.html'
     };
   })
   .directive("weakness", function() {
     return {
-      templateUrl: 'states/weakness.html'
+      templateUrl: 'states/moveanalysis.html'
     };
   })
   .filter('zeroPadding', function() {

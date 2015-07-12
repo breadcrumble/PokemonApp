@@ -10,7 +10,7 @@
         </h4>
       </th>
       <th>
-        <h4><strong>Weak Agaist:
+        <h4><strong>Weak Against:
           </strong>
         </h4>
       </th>
@@ -53,9 +53,27 @@
           <td>
             <h4>Overall Team</h4>
           </td>
-          <td>coming soon</td>
           <td>
-            Coming soon
+            <ul class="unstyled">
+              <li ng-if="value < firstTeam.length - 1"
+                ng-repeat="(key, value) in
+                overallSW()">
+                {{key}}
+                * {{value}}
+              </li>
+            </ul>
+
+          </td>
+          <td>
+            <ul class="unstyled">
+              <li ng-show="value > firstTeam.length - 1"
+                ng-repeat="(key, value) in
+                overallSW()">
+                {{key}}
+                * {{value}}
+              </li>
+            </ul>
+
           </td>
         </tr>
       </tbody>
