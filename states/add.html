@@ -13,7 +13,7 @@
 
             <div ng-show="!pokemon.data.type">
               <br>
-              <img src="lib/images/pokeball.png" alt="No Pokemon Selected Yet." />
+              <img src="lib/bootstrap/dist/images/pokeball.png" alt="No Pokemon Selected Yet." />
               <h4 class="center-align">No Pokemon has
                 been selected yet!</h4>
             </div>
@@ -26,7 +26,7 @@
 
                 <h4><span class="label" ng-class="pokemon.data.type[0] | lowercase">{{pokemon.data.type[0] | titlecase}}</span>
                 <span ng-show="pokemon.data.type[1]" class="label" ng-class="pokemon.data.type[1] | lowercase">{{pokemon.data.type[1] | titlecase}}</span></h4>
-                
+
 
             </div>
           </div>

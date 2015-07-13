@@ -30,6 +30,13 @@ td {
 	margin-left: auto;
 }
 
+/*jumbotron*/
+.typhlosion-bg{
+		background-image: url("../images/typhlosion.png");
+		background-repeat: no-repeat;
+		background-position: right top;
+}
+
 /*for fixed height*/
 
 .fixed-height {

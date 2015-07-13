@@ -48,44 +48,47 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
     ];
 
 
-    //NOTE model data
-    $scope.firstTeam = [{
-      "appState": "read",
-      "index": 0,
-      "data": {
-        "ndex": 652,
-        "name": "Chesnaught",
-        "type": ["Grass", "Fighting"],
-        "moves": {
-          "0": "Spiky Shield",
-          "1": "Leech Seed",
-          "2": "Pin Missile",
-          "3": "Belly Drum"
-        }
-      }
-    }, {
-      "appState": "read",
-      "index": 1,
-      "data": {
-        "ndex": 655,
-        "name": "Delphox",
-        "type": ["Fire", "Psychic"],
-        "moves": {
-          "0": "Flamethrower",
-          "1": "Flame Charge",
-          "2": "Lucky Chant",
-          "3": "Shadow Ball"
-        }
-      }
-    }, {
-      "appState": "blank",
-      "index": 2
-    }];
-
-    // NOTE this is just for testing and debugging. only use one scope.firstTeam at a time
+    // //NOTE model data
     // $scope.firstTeam = [{
-    //   "appState": "blank"
+    //   "appState": "read",
+    //   "index": 0,
+    //   "data": {
+    //     "ndex": 652,
+    //     "name": "Chesnaught",
+    //     "type": ["Grass", "Fighting"],
+    //     "moves": {
+    //       "0": "Spiky Shield",
+    //       "1": "Leech Seed",
+    //       "2": "Pin Missile",
+    //       "3": "Belly Drum"
+    //     }
+    //   }
+    // }, {
+    //   "appState": "read",
+    //   "index": 1,
+    //   "data": {
+    //     "ndex": 655,
+    //     "name": "Delphox",
+    //     "type": ["Fire", "Psychic"],
+    //     "moves": {
+    //       "0": "Flamethrower",
+    //       "1": "Flame Charge",
+    //       "2": "Lucky Chant",
+    //       "3": "Shadow Ball"
+    //     }
+    //   }
+    // }, {
+    //   "appState": "blank",
+    //   "index": 2
     // }];
+
+    //NOTE this is just for testing and debugging. only use one scope.firstTeam at a time
+    $scope.firstTeam = [
+      {
+        "appState": "blank",
+        "index": 0
+      }
+    ];
 
     //NOTE to get array of attacks
     $scope.getAttackList = function(pokemon) {
@@ -113,10 +116,14 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
     };
 
     //TODO 1. should the scope be for each move or for each pokemon?
-    $scope.getSWForMoveset = function(move) {
-      // 1. check if the move category is NOT status
+    $scope.getSWForMoveset = function(type) {
+      var array=[], swObject;
+      type = type + "";
+      array = $scope.attackMatrix[type];
+      swObject = $scope.typeStrengthWeakness(array);
       // 2. lookup type matrix
       // 3. show it.
+      return swObject;
     };
 
     //NOTE for retrieving strength/wk of pokemon type

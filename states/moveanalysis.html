@@ -8,10 +8,10 @@
         <h4><strong>Moveset</strong></h4>
       </th>
       <th>
-        <h4><strong>Super Effective</strong></h4>
+        <h4><strong>Super Effective Against</strong></h4>
       </th>
       <th>
-        <h4><strong>Not Very Effective</strong></h4>
+        <h4><strong>Not Very Effective Against</strong></h4>
       </th>
     </tr>
   </thead>
@@ -23,15 +23,32 @@
       <strong>{{pokemon.data.name}}
       </strong>
       <br>
-      <h4><span class="label" ng-class="pokemon.data.type[0] | lowercase">{{pokemon.data.type[0] | titlecase}}</span>
-      <span ng-show="pokemon.data.type[1]" class="label" ng-class="pokemon.data.type[1] | lowercase">{{pokemon.data.type[1] | titlecase}}</span></h4>
-      
+        <h4><span class="label" ng-class="pokemon.data.type[0] | lowercase">{{pokemon.data.type[0] | titlecase}}</span>
+          <span class="label" ng-class="pokemon.data.type[1] | lowercase"
+            ng-show="pokemon.data.type[1]">{{pokemon.data.type[1] | titlecase}}</span></h4>
       </td>
       <tr ng-repeat="data in getMovesetData(pokemon)">
         <td>
           <strong>{{data.Name}}</strong>
-          <br>{{data.Type}} | {{data.Category}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+          <br>{{data.Type}}
+            | {{data.Category}}
+          </td>
+          <td ng-show="data.Category!='Status'">
+            <ul class="unstyled">
+              <li ng-repeat="(key, value) in getSWForMoveset(data.Type)" ng-show="value>1">{{key}}
+              </li>
+            </ul>
+          </td>
+          <td ng-show="data.Category!='Status'">
+
+            <ul class="unstyled">
+              <li ng-repeat="(key, value) in getSWForMoveset(data.Type)" ng-show="value<1">{{key}}
+              </li>
+            </ul>
+          </td>
+          <td colspan="2" ng-show="data.Category==='Status'" class="parent">
+            <i>There is no type analysis for status moves.</i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
