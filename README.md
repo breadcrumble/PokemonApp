@@ -14,3 +14,9 @@ How To Open The App
 Note: If you download and run this app, it only works on Firefox, not Google Chrome. 
 When deployed it works on both browsers: http://breadcrumble.github.io/PokemonApp/
 
+13/7/2015: Version 1.0 is up. Only front-end functionality. No persistence and no backend.
+From Version 1.0-v2.0 I will be working on the backend functionality.
+
+---
+Frameworks used:
+Bootstrap, AngularJS, and a bit of UnderscoreJS.
