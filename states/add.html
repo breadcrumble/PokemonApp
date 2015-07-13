@@ -24,12 +24,9 @@
                 ng-src="http://www.serebii.net/xy/pokemon/{{pokemon.data.ndex |
                 zeroPadding}}.png"></img>
 
-                <h4>
-                  <strong>Type:
-                  </strong>
-                  <i>{{pokemon.data.type[0] | titlecase}}</i>
-                  <i ng-show="pokemon.data.type[1]">| {{pokemon.data.type[1] | titlecase}}</i>
-                </h4>
+                <h4><span class="label" ng-class="pokemon.data.type[0] | lowercase">{{pokemon.data.type[0] | titlecase}}</span>
+                <span ng-show="pokemon.data.type[1]" class="label" ng-class="pokemon.data.type[1] | lowercase">{{pokemon.data.type[1] | titlecase}}</span></h4>
+                
 
             </div>
           </div>

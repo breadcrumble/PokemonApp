@@ -14,12 +14,13 @@
             <img alt="{{pokemon.data.name}}" class="pokemon-avatar"
               ng-src="http://www.serebii.net/xy/pokemon/{{pokemon.data.ndex |
               zeroPadding}}.png"/>
-            <h4>
-              <strong>Type:
-              </strong>
-              <i>{{pokemon.data.type[0] | titlecase}}</i>
-              <i ng-show="pokemon.data.type[1]">| {{pokemon.data.type[1] | titlecase}}</i>
-            </h4>
+
+
+
+              <h4><span class="label" ng-class="pokemon.data.type[0] | lowercase">{{pokemon.data.type[0] | titlecase}}</span>
+              <span ng-show="pokemon.data.type[1]" class="label" ng-class="pokemon.data.type[1] | lowercase">{{pokemon.data.type[1] | titlecase}}</span></h4>
+
+            <hr>
             <button aria-label="Left Align" class="btn btn-default btn-sm"
               ng-click="editPokemon(pokemon)" type="button">
               <span aria-hidden="true" class="glyphicon glyphicon-edit"></span>

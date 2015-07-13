@@ -162,6 +162,21 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
     //TODO refactor out the $scope and put var for some of the afn.
 
     //NOTE overall team
+    var filterSW = function(array) {
+      var outputArray = [];
+      for (var i = 0; i < array.length; i++) {
+        if (array[i]<1) {
+          outputArray[i] = 1;
+        }
+        else if (array[i]>1) {
+          outputArray[i] = -1;
+        }
+        else {
+          outputArray[i] = 0;
+        }
+      }
+      return outputArray;
+    };
     $scope.overallSW = function() {
       var typeArray = [],
         finalArray = [],
@@ -171,8 +186,10 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
         var pkmn = $scope.firstTeam[i];
         var array1 = $scope.getStrengthAndWeakness(pkmn);
         array1 = $scope.multiplyArray(array1);
+        array1 = filterSW(array1);
         typeArray.push(array1);
       }
+
       for (var j = 0; j < 18; j++) {
         for (var i = 0; i < x - 1; i++) {
           if (!finalArray[j]) {
@@ -182,7 +199,7 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
           }
         }
       }
-      swObj = $scope.typeStrengthWeakness(finalArray)
+      swObj = $scope.typeStrengthWeakness(finalArray);
       return swObj;
     };
 

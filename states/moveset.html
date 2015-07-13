@@ -17,9 +17,9 @@
         zeroPadding}}.png"/><br>
         <strong>{{pokemon.data.name}}</strong>
         <br>
-        <i>{{pokemon.data.type[0] | titlecase}}</i>
-        <i ng-show="pokemon.data.type[1]">| {{pokemon.data.type[1] | titlecase}}</i>
-      </td>
+        <h4><span class="label" ng-class="pokemon.data.type[0] | lowercase">{{pokemon.data.type[0] | titlecase}}</span>
+        <span ng-show="pokemon.data.type[1]" class="label" ng-class="pokemon.data.type[1] | lowercase">{{pokemon.data.type[1] | titlecase}}</span></h4>
+        
       <td ng-repeat="data in getMovesetData(pokemon)">
         <strong>{{data.Name}}</strong>
         <br>Type: {{data.Type}} | Category: {{data.Category}}

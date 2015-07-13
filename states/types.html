@@ -25,8 +25,9 @@
         <br>
           <strong>{{pokemon.data.name}}</strong>
           <br>
-            <i>{{pokemon.data.type[0] | titlecase}}</i>
-            <i ng-show="pokemon.data.type[1]">| {{pokemon.data.type[1] | titlecase}}</i>
+          <h4><span class="label" ng-class="pokemon.data.type[0] | lowercase">{{pokemon.data.type[0] | titlecase}}</span>
+          <span ng-show="pokemon.data.type[1]" class="label" ng-class="pokemon.data.type[1] | lowercase">{{pokemon.data.type[1] | titlecase}}</span></h4>
+
           </td>
           <td>
             <ul class="unstyled">
@@ -50,27 +51,31 @@
           </td>
         </tr>
         <tr>
-          <td>
-            <h4>Overall Team</h4>
+          <td width="30%">
+            <h4><strong>Overall Team</strong></h4>
+            <p>
+              The number represents the <strong>net number</strong> <br>(resistant - weak against) of Pokemon who are Resistant or Weak against a type.
+            </p>
+
           </td>
           <td>
             <ul class="unstyled">
-              <li ng-if="value < firstTeam.length - 1"
+              <li ng-if="value > 0"
                 ng-repeat="(key, value) in
                 overallSW()">
-                {{key}}
-                * {{value}}
+                {{key}}:
+                 {{value}}
               </li>
             </ul>
 
           </td>
           <td>
             <ul class="unstyled">
-              <li ng-show="value > firstTeam.length - 1"
+              <li ng-if="value < 0"
                 ng-repeat="(key, value) in
                 overallSW()">
-                {{key}}
-                * {{value}}
+                {{key}}:
+                 {{-value}}
               </li>
             </ul>
 
