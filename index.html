@@ -43,8 +43,6 @@
       <h1>Pokemon Analyzer</h1>
       <p>You build your team and we analyze it for you!</p>
 
-
-
       <p><a class="btn btn-primary btn-lg" href="#select" role="button">Select Your
           Pokemon</a></p>
     </div>
@@ -92,14 +90,14 @@
     </div>
 
 
-    <tabset justified="true" type="pills">
+    <tabset justified="true" type="pills" ng-if="firstTeam.length>1">
       <tab heading="Full Details">
         <div moveset></div>
       </tab>
-      <tab heading="Pokemon Type">
+      <tab heading="Pokemon Type (Defensive)">
       <div strengths></div>
       </tab>
-      <tab heading="Moveset">
+      <tab heading="Moveset (Offensive)">
         <div weakness>
         </div>
       </tab>

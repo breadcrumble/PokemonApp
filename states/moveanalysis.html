@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody ng-if="pokemon.data.name" ng-repeat="pokemon in firstTeam">
-    <td rowspan="5">
+    <td class="parent" rowspan="5">
       <img alt="{{pokemon.data.name}}"
         ng-src="http://www.serebii.net/xy/pokemon/{{pokemon.data.ndex |
         zeroPadding}}.png"/><br>
@@ -40,15 +40,46 @@
             </ul>
           </td>
           <td ng-show="data.Category!='Status'">
-
             <ul class="unstyled">
               <li ng-repeat="(key, value) in getSWForMoveset(data.Type)" ng-show="value<1">{{key}}
               </li>
             </ul>
           </td>
-          <td colspan="2" ng-show="data.Category==='Status'" class="parent">
+          <td class="parent" colspan="2" ng-show="data.Category==='Status'">
             <i>There is no type analysis for status moves.</i>
           </td>
         </tr>
       </tbody>
+      <table class='table table-striped table-bordered table-hover table-condensed'>
+        <thead>
+          <th>
+            <h4>Overall Results</h4>
+          </th>
+          <th>
+            <h4>Types Affected</h4>
+          </th>
+          <th>
+            <h4>Types Unaffected</h4>
+          </th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+
+            </td>
+            <td>
+              <ul class="unstyled">
+                <li ng-repeat="(key, value) in strengthSummary()" ng-show="value>0" >{{key}} : {{value}} moves
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="unstyled">
+                <li ng-repeat="(key, value) in strengthSummary()" ng-show="value==0">{{key}}
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </table>

@@ -12,14 +12,16 @@
   <tbody>
     <tr ng-repeat="pokemon in firstTeam" ng-if="pokemon.data.name">
       <!-- TODO filter by appState: show only if appState is set to Read -->
-      <td width="20%"><img alt="{{pokemon.data.name}}"
-        ng-src="http://www.serebii.net/xy/pokemon/{{pokemon.data.ndex |
-        zeroPadding}}.png"/><br>
-        <strong>{{pokemon.data.name}}</strong>
-        <br>
-        <h4><span class="label" ng-class="pokemon.data.type[0] | lowercase">{{pokemon.data.type[0] | titlecase}}</span>
-        <span ng-show="pokemon.data.type[1]" class="label" ng-class="pokemon.data.type[1] | lowercase">{{pokemon.data.type[1] | titlecase}}</span></h4>
+      <td width="20%" class="parent"><div class="center-align">
+        <img alt="{{pokemon.data.name}}" class="pokemon-avatar"
+          ng-src="http://www.serebii.net/xy/pokemon/{{pokemon.data.ndex |
+          zeroPadding}}.png"/><br>
+          <strong>{{pokemon.data.name}}</strong>
 
+          <h4 class="pokemon-avatar"><span class="label" ng-class="pokemon.data.type[0] | lowercase">{{pokemon.data.type[0] | titlecase}}</span>
+          <span ng-show="pokemon.data.type[1]" class="label" ng-class="pokemon.data.type[1] | lowercase">{{pokemon.data.type[1] | titlecase}}</span></h4>
+      </div>
+</td>
       <td ng-repeat="data in getMovesetData(pokemon)" width="20%">
         <strong>{{data.Name}}</strong>
         <br>Type: {{data.Type}} | Category: {{data.Category}}
@@ -30,5 +32,6 @@
             {{data.Effect}}
             </td>
           </tr>
+          
         </tbody>
       </table>

@@ -19,7 +19,7 @@
   <tbody>
     <tr ng-if="pokemon.data.name" ng-repeat="pokemon in firstTeam">
       <!-- TODO filter by appState: show only if appState is set to Read -->
-      <td><img alt="{{pokemon.data.name}}"
+      <td class="parent"><img alt="{{pokemon.data.name}}"
         ng-src="http://www.serebii.net/xy/pokemon/{{pokemon.data.ndex |
         zeroPadding}}.png"/>
         <br>

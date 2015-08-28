@@ -47,7 +47,47 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
       "Water"
     ];
 
+    $scope.strengthSummary = function() {
+      //creates array of all the moves that the pokemon have
+      var array = [],
+        moveArray = [],
+        swArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        move, x, numMoves;
+      for (var i = 0; i < $scope.firstTeam.length - 1; i++) {
+        array.push(_.values($scope.firstTeam[i].data.moves));
+      }
+      //use regex
+      array = _.flatten(array);
+      for (var i = 0; i < array.length; i++) {
+        array[i] = array[i].replace(/\s+/g, '').toLowerCase();
+      }
+      //get the attack's type, provided that the attack is not STATUS
+      for (var i = 0; i < array.length; i++) {
+        if ($scope.attackDex[array[i]]["Category"] != "Status") {
 
+          moveData = $scope.attackDex[array[i]]["Type"];
+          moveArray.push($scope.attackMatrix[moveData]);
+        }
+      }
+      numMoves = moveArray.length;
+      moveArray = _.flatten(moveArray);
+      for (var i = 0; i < moveArray.length; i++) {
+        if (moveArray[i]<2) {
+          moveArray[i] = 1;
+        }
+      }
+      // Sum every term and compress into an array of 18 terms.
+      for (var i = 0; i < moveArray.length; i++) {
+        x = (i % 18);
+        swArray[x] += moveArray[i];
+      }
+      for (var i = 0; i < swArray.length; i++) {
+        swArray[i] -= numMoves;
+      }
+      // return numMoves;
+      return typeStrengthWeakness(swArray);
+
+    };
     // //NOTE model data
     // $scope.firstTeam = [{
     //   "appState": "read",
@@ -116,8 +156,9 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
     };
 
     //TODO 1. should the scope be for each move or for each pokemon?
-    $scope.getSWForMoveset = function(type) {
-      var array=[], swObject;
+    var getSWForMoveset = function(type) {
+      var array = [],
+        swObject;
       type = type + "";
       array = $scope.attackMatrix[type];
       swObject = $scope.typeStrengthWeakness(array);
@@ -125,7 +166,7 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
       // 3. show it.
       return swObject;
     };
-
+    $scope.getSWForMoveset = getSWForMoveset;
     //NOTE for retrieving strength/wk of pokemon type
     $scope.getStrengthAndWeakness = function(pokemon) {
       var pokemonType, test, array = [],
@@ -161,24 +202,22 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
     };
 
     //NOTE it works
-    $scope.typeStrengthWeakness = function(array) {
+    var typeStrengthWeakness = function(array) {
       var swObject = _.object($scope.listOfTypes, array);
       return swObject;
     };
-
+    $scope.typeStrengthWeakness = typeStrengthWeakness;
     //TODO refactor out the $scope and put var for some of the afn.
 
     //NOTE overall team
     var filterSW = function(array) {
       var outputArray = [];
       for (var i = 0; i < array.length; i++) {
-        if (array[i]<1) {
+        if (array[i] < 1) {
           outputArray[i] = 1;
-        }
-        else if (array[i]>1) {
+        } else if (array[i] > 1) {
           outputArray[i] = -1;
-        }
-        else {
+        } else {
           outputArray[i] = 0;
         }
       }
@@ -218,6 +257,7 @@ angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngFx'])
         var blankSlot = {
           "appState": "blank",
           "index": $scope.firstTeam.length
+
         };
         $scope.firstTeam.push(blankSlot);
       } else {

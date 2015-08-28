@@ -11,11 +11,13 @@ How To Open The App
 3. Angular Directive for Confirmation Dialogues. https://gist.github.com/asafge/7430497
 4. CSV to JSON converter: http://www.convertcsv.com/
 
-Note: If you download and run this app, it only works on Firefox, not Google Chrome. 
+Note: If you download and run this app, it only works on Firefox, not Google Chrome.
 When deployed it works on both browsers: http://breadcrumble.github.io/PokemonApp/
 
 13/7/2015: Version 1.0 is up. Only front-end functionality. No persistence and no backend.
 From Version 1.0-v2.0 I will be working on the backend functionality.
+28/8/2015: Changed the formatting a bit. Added a function to sum up all types which can be dealt Super Effective damage by the moveset.
+---
 
 ---
 Frameworks used:
